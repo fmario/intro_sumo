@@ -1,0 +1,17 @@
+*.aux
+*.log
+*.toc
+*.out
+*.tmp
+*.bak
+*.gz
+*.swp
+*.gnuplot
+*eps-converted*.pdf
+*.g_c
+*.g_x
+*/Debug/*
+*/Generated_Code/*
+*/Documentation/*
+*/Static_Code/*
+.cwGeneratedFileSetLog
