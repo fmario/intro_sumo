@@ -34,6 +34,13 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "LedBit1.h"
+#include "BitIoLdd1.h"
+#include "LedBit2.h"
+#include "BitIoLdd2.h"
+#include "LedBit3.h"
+#include "BitIoLdd3.h"
+#include "WAIT1.h"
 
 #ifdef __cplusplus
 extern "C" {
