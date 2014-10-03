@@ -10,8 +10,9 @@
 *eps-converted*.pdf
 *.g_c
 *.g_x
-*/Debug/*
-*/Generated_Code/*
-*/Documentation/*
-*/Static_Code/*
-.cwGeneratedFileSetLog
+*.cwGeneratedFileSetLog
+Debug/
+Generated_Code/
+Documentation/
+Static_Code/
+doxy/
