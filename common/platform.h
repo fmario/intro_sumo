@@ -10,6 +10,8 @@
 #ifndef PLATFORM_H_
 #define PLATFORM_H_
 
+#include "PE_Types.h" /* for common Processor Expert types used throughout the project, e.g. 'bool' */
+#include "PE_Error.h" /* global error constants */
 #include <stddef.h>   /* for NULL */
 
 /* List of supported platforms. The PL_BOARD_IS_xxx is defined in the compiler command line settings.  */
@@ -30,6 +32,12 @@
 #else
   #error "unknown configuration?"
 #endif
+
+#define PL_HAS_EVENTS (1)
+/*!< Set to 1 to enable events support, 0 otherwise */
+
+#define PL_HAS_TIMER (1)
+/*!< Set to 1 to enable timer support, 0 otherwise */
 
 /*!
  * \brief Platform initialization
