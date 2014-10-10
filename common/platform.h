@@ -26,18 +26,40 @@
 #if PL_IS_FRDM
   #define PL_NOF_LEDS       3
      /*!< FRDM board has 3 LEDs (RGB) */
+
+  #define PL_HAS_EVENTS (1)
+	/*!< Set to 1 to enable event support, 0 otherwise */
+
+  #define PL_HAS_TIMER (1)
+	/*!< Set to 1 to enable timer support, 0 otherwise */
+
+  #define PL_HAS_KEYS (1)
+	/*!< Set to 1 to enable key support, 0 otherwise */
+
+  #define PL_NOF_KEYS 		7
+	/*!< FRDM board has 7 Keys (A-F and Joystick pressed) */
+
+  #define PL_HAS_KBI (1)
+	/*!< Set to 1 to enable key interrupt support, 0 otherwise */
+	#define PL_KEY1_POLLED (0)
+	#define PL_KEY2_POLLED (0)
+	#define PL_KEY3_POLLED (0)
+	#define PL_KEY4_POLLED (0)
+	#define PL_KEY5_POLLED (1)
+	#define PL_KEY6_POLLED (1)
+	#define PL_KEY7_POLLED (0)
+
+  #define PL_HAS_JOYSTICK (1)
+	/*!< Set to 1 to enable joystick support, 0 otherwise */
+
 #elif PL_IS_ROBO
   #define PL_NOF_LEDS       2
      /*!< We have up to 2 LED's on the robo board */
+
 #else
   #error "unknown configuration?"
+
 #endif
-
-#define PL_HAS_EVENTS (1)
-/*!< Set to 1 to enable events support, 0 otherwise */
-
-#define PL_HAS_TIMER (1)
-/*!< Set to 1 to enable timer support, 0 otherwise */
 
 /*!
  * \brief Platform initialization

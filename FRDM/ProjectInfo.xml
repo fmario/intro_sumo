@@ -54,13 +54,27 @@
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd1.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd2.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd3.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd8.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd9.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\CS1.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\Cpu.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd1.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd2.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd3.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd4.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd5.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\HF1.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\LedBit1.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\LedBit2.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\LedBit3.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\PE_LDD.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW1.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW2.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW3.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW4.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW5.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW6.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW7.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\TI1.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\TU1.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\TimerIntLdd1.c</PathName>
@@ -70,6 +84,7 @@
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\Events.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Application.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Event.c</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Keys.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\LED.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Timer.c</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\platform.c</PathName>
@@ -79,8 +94,15 @@
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd1.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd2.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd3.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd8.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\BitIoLdd9.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\CS1.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\Cpu.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd1.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd2.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd3.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd4.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\ExtIntLdd5.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\HF1.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\IO_Map.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\LedBit1.h</PathName>
@@ -90,6 +112,13 @@
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\PE_Error.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\PE_LDD.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\PE_Types.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW1.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW2.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW3.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW4.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW5.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW6.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\SW7.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\TI1.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\TU1.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Generated_Code\TimerIntLdd1.h</PathName>
@@ -97,6 +126,7 @@
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\Events.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Application.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Event.h</PathName>
+      <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Keys.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\LED.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\Timer.h</PathName>
       <PathName>C:\Users\Dexter\GitHub\intro_sumo\FRDM\Sources\common\platform.h</PathName>

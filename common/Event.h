@@ -18,6 +18,13 @@
 typedef enum EVNT_Handle {
   EVNT_INIT,            /*!< System Initialization Event */
   EVNT_LED_HEARTBEAT,	/*!< LED Blink Event */
+  EVNT_SW1_PRESSED,		/*!< Key A pressed */
+  EVNT_SW2_PRESSED,		/*!< Key B pressed */
+  EVNT_SW3_PRESSED,		/*!< Key C pressed */
+  EVNT_SW4_PRESSED,		/*!< Key D pressed */
+  EVNT_SW5_PRESSED,		/*!< Key E pressed */
+  EVNT_SW6_PRESSED,		/*!< Key F pressed */
+  EVNT_SW7_PRESSED,		/*!< Joystick pressed */
   EVNT_NOF_EVENTS       /*!< Must be last one! */
 } EVNT_Handle;
 

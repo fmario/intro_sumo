@@ -15,48 +15,64 @@
   #include "LED.h"
 #endif
 #if PL_HAS_EVENTS
-	#include "Event.h"
+  #include "Event.h"
 #endif
 
 
 static void APP_HandleEvent(EVNT_Handle event){
 	switch(event){
 	case EVNT_INIT:
-		LED1_On();
-		WAIT1_Waitms(50);
-		LED1_Off();
 		LED2_On();
-		WAIT1_Waitms(50);
-		LED2_Off();
-		LED3_On();
-		WAIT1_Waitms(50);
-		LED3_Off();
+		WAIT1_Waitms(100);
+		LED1_Off();
 		break;
 	case EVNT_LED_HEARTBEAT:
-		LED2_Neg();
+		LED3_Neg();
+		break;
+	case EVNT_SW1_PRESSED:
+		LED_AllOff();
+		LED1_On();
+		break;
+	case EVNT_SW2_PRESSED:
+		LED_AllOff();
+		LED3_On();
+		break;
+	case EVNT_SW3_PRESSED:
+		LED_AllOff();
+		LED1_On();
+		LED2_On();
+		break;
+	case EVNT_SW4_PRESSED:
+		LED_AllOff();
+		LED2_On();
+		break;
+	case EVNT_SW5_PRESSED:
+		LED_AllOff();
+		LED2_On();
+		LED3_On();
+		break;
+	case EVNT_SW6_PRESSED:
+		LED_AllOff();
+		LED1_On();
+		LED3_On();
+		break;
+	case EVNT_SW7_PRESSED:
+		LED_AllOff();
+		LED1_On();
+		LED2_On();
+		LED3_On();
 		break;
 	}
 }
 
-static void APP_Init(){
-	PL_Init(); /* platform initialization */
-	EVNT_Init(); /* event initialization*/
-	TMR_Init(); /* timer initialization*/
-}
-
-static void APP_Deinit(){
-	EVNT_Deinit(); /* event deinitialization */
-	PL_Deinit(); /* platform deinitialization */
-	TMR_Deinit(); /* timer deinitialization */
-}
-
 void APP_Start(void) {
-  APP_Init();
+  PL_Init(); /* platform initialization */
   for(;;) {
+	  KEY_Scan();
 #if PL_HAS_EVENTS
 	  EVNT_HandleEvent(APP_HandleEvent);
 #endif
 	  WAIT1_Waitms(100);
   }
-  APP_Deinit();
+  PL_Deinit(); /* platform deinitialization */
 }
