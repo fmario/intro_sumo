@@ -110,6 +110,15 @@
   #define LED3_Deinit() /* do nothing */
     /*!< De-Initialize LED 3 */
 #endif
+/*!
+ * \brief Set all LED off .
+ */
+void LED_AllOff(void);
+
+/*!
+ * \brief Set all LED on .
+ */
+void LED_AllOn(void);
 
 /*!
  * \brief LED test routine.

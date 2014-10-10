@@ -10,6 +10,30 @@
 #include "Platform.h"
 #include "LED.h"
 
+void LED_AllOff(void){
+  #if PL_NOF_LEDS>=1
+	LED1_Off();
+  #endif
+  #if PL_NOF_LEDS>=2
+	LED2_Off();
+  #endif
+  #if PL_NOF_LEDS>=3
+	LED3_Off();
+  #endif
+}
+
+void LED_AllOn(void){
+  #if PL_NOF_LEDS>=1
+	LED1_On();
+  #endif
+  #if PL_NOF_LEDS>=2
+	LED2_On();
+  #endif
+  #if PL_NOF_LEDS>=3
+	LED3_On();
+  #endif
+
+}
 void LED_Deinit(void) {
   /* all LED's off by default */
   #if PL_NOF_LEDS>=1
