@@ -54,16 +54,37 @@ void KEY_Scan(void) {
 
 #if PL_HAS_KBI
 void KEY_OnInterrupt(KEY_Buttons button) {
-  switch(button){
+  /*! \todo will need to implement functionality for interrupts */
+#if PL_HAS_DEBOUNCE
+  KEYDBNC_Process();
+#else
+  switch(button) {
+#if PL_NOF_KEYS >= 1
     case KEY_BTN1: EVNT_SetEvent(EVNT_SW1_PRESSED); break;
+#endif
+#if PL_NOF_KEYS >= 2
     case KEY_BTN2: EVNT_SetEvent(EVNT_SW2_PRESSED); break;
+#endif
+#if PL_NOF_KEYS >= 3
     case KEY_BTN3: EVNT_SetEvent(EVNT_SW3_PRESSED); break;
+#endif
+#if PL_NOF_KEYS >= 4
     case KEY_BTN4: EVNT_SetEvent(EVNT_SW4_PRESSED); break;
+#endif
+#if PL_NOF_KEYS >= 5
     case KEY_BTN5: EVNT_SetEvent(EVNT_SW5_PRESSED); break;
+#endif
+#if PL_NOF_KEYS >= 6
     case KEY_BTN6: EVNT_SetEvent(EVNT_SW6_PRESSED); break;
+#endif
+#if PL_NOF_KEYS >= 6
     case KEY_BTN7: EVNT_SetEvent(EVNT_SW7_PRESSED); break;
-    default: break;
-  }
+#endif
+    default:
+      /* unknown? */
+      break;
+  } /* switch */
+#endif
 }
 
 void PORTA_OnInterrupt(void) {

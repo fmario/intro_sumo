@@ -12,14 +12,14 @@
 #if PL_HAS_EVENTS
 	#include "Event.h"
 #endif
+#if PL_HAS_TRIGGER
+  #include "Trigger.h"
+#endif
 
 void TMR_OnInterrupt(void) {
-  static unsigned char cntr_tick = 0;
-
-  if((++cntr_tick) >= 1000/TMR_TICK_MS){
-	  //EVNT_SetEvent(EVNT_LED_HEARTBEAT);
-	  cntr_tick = 0;
-  }
+  #if PL_HAS_TRIGGER
+    TRG_IncTick();
+  #endif
 }
 
 void TMR_Init(void) {
