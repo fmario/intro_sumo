@@ -51,6 +51,7 @@
 #include "ExtIntLdd2.h"
 #include "SW3.h"
 #include "ExtIntLdd3.h"
+#include "PTA.h"
 #include "SW4.h"
 #include "ExtIntLdd4.h"
 #include "SW5.h"
@@ -59,6 +60,10 @@
 #include "BitIoLdd9.h"
 #include "SW7.h"
 #include "ExtIntLdd5.h"
+#include "CLS1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "UTIL1.h"
 #include "WAIT1.h"
 
 #ifdef __cplusplus

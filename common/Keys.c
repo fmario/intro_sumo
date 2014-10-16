@@ -65,6 +65,12 @@ void KEY_OnInterrupt(KEY_Buttons button) {
     default: break;
   }
 }
+
+void PORTA_OnInterrupt(void) {
+  void Cpu_ivINT_PORTA(void); /* prototype of ISR in Cpu.c */
+  /* call interrupt handler created by the ExtInt components */
+  Cpu_ivINT_PORTA();
+}
 #endif
 
 /*! \brief Key driver initialization */
