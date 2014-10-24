@@ -15,4 +15,8 @@
  */
 void APP_Start(void);
 
+#if PL_HAS_RTOS
+static void APP_Loop(void* pvParameters);
+#endif
+
 #endif /* APPLICATION_H_ */

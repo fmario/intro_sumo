@@ -1,7 +1,7 @@
 /* ###################################################################
 **     Filename    : main.c
 **     Project     : Robo
-**     Processor   : MKL25Z128VLK4
+**     Processor   : MK22FX512VLK12
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
 **     Date/Time   : 2014-09-18, 16:10, # CodeGen: 0
@@ -44,6 +44,8 @@
 #include "TU1.h"
 #include "BUZ1.h"
 #include "BitIoLdd4.h"
+#include "FRTOS1.h"
+#include "UTIL1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
