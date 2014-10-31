@@ -22,8 +22,11 @@
 static uint32_t SHELL_val; /* used as demo value for shell */
 
 void SHELL_SendString(unsigned char *msg) {
-  /*! \todo Replace this with message queues */
-  CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
+  #if PL_HAS_SHELL_QUEUE
+    SQUEUE_SendString(msg);
+  #else
+    CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
+  #endif
 }
 
 /*!
@@ -77,14 +80,14 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 {
   CLS1_ParseCommand, /* Processor Expert Shell component, is first in list */
   SHELL_ParseCommand, /* our own module parser */
-#if FRTOS1_PARSE_COMMAND_ENABLED
-  FRTOS1_ParseCommand, /* FreeRTOS shell parser */
-#endif
-#if PL_HAS_BLUETOOTH
-#if BT1_PARSE_COMMAND_ENABLED
-  BT1_ParseCommand,
-#endif
-#endif
+  #if FRTOS1_PARSE_COMMAND_ENABLED
+    FRTOS1_ParseCommand, /* FreeRTOS shell parser */
+  #endif
+  #if PL_HAS_BLUETOOTH
+  #if BT1_PARSE_COMMAND_ENABLED
+    BT1_ParseCommand,
+  #endif
+  #endif
   NULL /* Sentinel */
 };
 
@@ -123,52 +126,52 @@ static CLS1_ConstStdIOType CDC_stdio = {
 #endif
 
 static portTASK_FUNCTION(ShellTask, pvParameters) {
-#if PL_HAS_USB_CDC
-  static unsigned char cdc_buf[48];
-#endif
-#if PL_HAS_BLUETOOTH
-  static unsigned char bluetooth_buf[48];
-#endif
-  static unsigned char localConsole_buf[48];
-#if CLS1_DEFAULT_SERIAL
-  CLS1_ConstStdIOTypePtr ioLocal = CLS1_GetStdio();  
-#endif
+  #if PL_HAS_USB_CDC
+    static unsigned char cdc_buf[48];
+  #endif
+  #if PL_HAS_BLUETOOTH
+    static unsigned char bluetooth_buf[48];
+  #endif
+    static unsigned char localConsole_buf[48];
+  #if CLS1_DEFAULT_SERIAL
+    CLS1_ConstStdIOTypePtr ioLocal = CLS1_GetStdio();
+  #endif
   
   (void)pvParameters; /* not used */
-#if PL_HAS_USB_CDC
-  cdc_buf[0] = '\0';
-#endif
-#if PL_HAS_BLUETOOTH
-  bluetooth_buf[0] = '\0';
-#endif
-  localConsole_buf[0] = '\0';
-#if CLS1_DEFAULT_SERIAL
-  (void)CLS1_ParseWithCommandTable((unsigned char*)CLS1_CMD_HELP, ioLocal, CmdParserTable);
-#endif
+  #if PL_HAS_USB_CDC
+    cdc_buf[0] = '\0';
+  #endif
+  #if PL_HAS_BLUETOOTH
+    bluetooth_buf[0] = '\0';
+  #endif
+    localConsole_buf[0] = '\0';
+  #if CLS1_DEFAULT_SERIAL
+    (void)CLS1_ParseWithCommandTable((unsigned char*)CLS1_CMD_HELP, ioLocal, CmdParserTable);
+  #endif
   for(;;) {
-#if CLS1_DEFAULT_SERIAL
-    (void)CLS1_ReadAndParseWithCommandTable(localConsole_buf, sizeof(localConsole_buf), ioLocal, CmdParserTable);
-#endif
-#if PL_HAS_USB_CDC
-    (void)CLS1_ReadAndParseWithCommandTable(cdc_buf, sizeof(cdc_buf), &CDC_stdio, CmdParserTable);
-#endif
-#if PL_HAS_BLUETOOTH
-    (void)CLS1_ReadAndParseWithCommandTable(bluetooth_buf, sizeof(bluetooth_buf), &BT_stdio, CmdParserTable);
-#endif
+    #if CLS1_DEFAULT_SERIAL
+        (void)CLS1_ReadAndParseWithCommandTable(localConsole_buf, sizeof(localConsole_buf), ioLocal, CmdParserTable);
+    #endif
+    #if PL_HAS_USB_CDC
+        (void)CLS1_ReadAndParseWithCommandTable(cdc_buf, sizeof(cdc_buf), &CDC_stdio, CmdParserTable);
+    #endif
+    #if PL_HAS_BLUETOOTH
+        (void)CLS1_ReadAndParseWithCommandTable(bluetooth_buf, sizeof(bluetooth_buf), &BT_stdio, CmdParserTable);
+    #endif
     FRTOS1_vTaskDelay(50/portTICK_RATE_MS);
   } /* for */
 }
 
 void SHELL_Init(void) {
   CLS1_Init();
-#if !CLS1_DEFAULT_SERIAL && PL_HAS_BLUETOOTH
-  (void)CLS1_SetStdio(&BT_stdio); /* use the Bluetooth stdio as default */
-#endif
-#if PL_HAS_RTOS
-  if (FRTOS1_xTaskCreate(ShellTask, "Shell", configMINIMAL_STACK_SIZE+150, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
-    for(;;){} /* error */
-  }
-#endif
+  #if !CLS1_DEFAULT_SERIAL && PL_HAS_BLUETOOTH
+    (void)CLS1_SetStdio(&BT_stdio); /* use the Bluetooth stdio as default */
+  #endif
+  #if PL_HAS_RTOS
+    if (FRTOS1_xTaskCreate(ShellTask, "Shell", configMINIMAL_STACK_SIZE+150, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
+      for(;;){} /* error */
+    }
+  #endif
 }
 
 void SHELL_Deinit(void) {

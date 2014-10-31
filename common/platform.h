@@ -50,7 +50,7 @@
   /*!< Set to 1 if using USB CDC, 0 otherwise */
 #define PL_HAS_BLUETOOTH      (1 && PL_IS_ROBO)
   /*!< Set to 1 if using Bluetooth, 0 otherwise */
-#define PL_HAS_SHELL_QUEUE    (0 && PL_HAS_SHELL)
+#define PL_HAS_SHELL_QUEUE    (1 && PL_HAS_SHELL)
   /*!< Set to 1 if using shell queues, 0 otherwise */
 
 /* additional hardware configuration */
