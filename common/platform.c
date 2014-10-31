@@ -1,12 +1,11 @@
 /**
  * \file
- * \brief Platform Interface.
- * \author Mario Felder, mario.felder@stud.hslu.ch
+ * \brief Platform implementation module.
+ * \author Erich Styger, erich.styger@hslu.ch
  *
- * This implements the platform interface.
+ * This implements the platform module.
  * Here the platform gets initialized, and all platform dependent macros get defined.
  */
-
 
 #include "Platform.h"
 #if PL_HAS_LED
@@ -36,6 +35,12 @@
 #endif
 #if PL_HAS_RTOS
   #include "RTOS.h"
+#endif
+#if PL_HAS_SHELL
+  #include "Shell.h"
+#endif
+#if PL_HAS_SHELL_QUEUE
+  #include "ShellQueue.h"
 #endif
 
 void PL_Init(void) {
@@ -67,18 +72,30 @@ void PL_Init(void) {
 #if PL_HAS_RTOS
   RTOS_Init();
 #endif
+#if PL_HAS_SHELL
+  SHELL_Init();
+#endif
+#if PL_HAS_SHELL_QUEUE
+  SQUEUE_Init();
+#endif
 }
 
 void PL_Deinit(void) {
+#if PL_HAS_SHELL_QUEUE
+  SQUEUE_Deinit();
+#endif
+#if PL_HAS_SHELL
+  SHELL_Deinit();
+#endif
 #if PL_HAS_RTOS
   RTOS_Deinit();
+#endif
+#if PL_HAS_BUZZER
+  BUZ_Deinit();
 #endif
 #if PL_HAS_DEBOUNCE
   KEYDBNC_Deinit();
   DBNC_Deinit();
-#endif
-#if PL_HAS_BUZZER
-  BUZ_Deinit();
 #endif
 #if PL_HAS_TRIGGER
   TRG_Deinit();

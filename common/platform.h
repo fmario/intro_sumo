@@ -1,7 +1,7 @@
 /**
  * \file
  * \brief Platform Interface.
- * \author Mario Felder, mario.felder@stud.hslu.ch
+ * \author Erich Styger, erich.styger@hslu.ch
  *
  * This implements the platform interface.
  * Here the platform gets initialized, and all platform dependent macros get defined.
@@ -36,7 +36,7 @@
   /*!< Set to 1 to enable joystick shield support, 0 otherwise */
 #define PL_HAS_MEALY          (0 && PL_NOF_LEDS>=1 && PL_NOF_KEYS>=1)
   /*!< Set to 1 to enable Mealy FSM, 0 otherwise */
-#define PL_HAS_SHELL          (1 && PL_IS_FRDM)
+#define PL_HAS_SHELL          (1 && (PL_IS_FRDM || (PL_IS_ROBO && PL_HAS_USB_CDC)))
   /*!< Set to 1 to enable shell, 0 otherwise */
 #define PL_HAS_TRIGGER        (1 && PL_HAS_TIMER)
   /*!< Set to 1 to enable triggers, 0 otherwise */
@@ -46,6 +46,12 @@
   /*!< Set to 1 to enable triggers, 0 otherwise */
 #define PL_HAS_RTOS           (1)
   /*!< Set to 1 if using FreeRTOS, 0 otherwise */
+#define PL_HAS_USB_CDC        (1)
+  /*!< Set to 1 if using USB CDC, 0 otherwise */
+#define PL_HAS_BLUETOOTH      (1 && PL_IS_ROBO)
+  /*!< Set to 1 if using Bluetooth, 0 otherwise */
+#define PL_HAS_SHELL_QUEUE    (0 && PL_HAS_SHELL)
+  /*!< Set to 1 if using shell queues, 0 otherwise */
 
 /* additional hardware configuration */
 
@@ -59,7 +65,7 @@
   #define PL_KEY_POLLED_KEY6    (1)
   #define PL_KEY_POLLED_KEY7    (0)
 #elif PL_IS_ROBO
-  #define PL_KEY_POLLED_KEY1    (0)
+  #define PL_KEY_POLLED_KEY1    (1)
 #endif
 
 #if PL_IS_FRDM

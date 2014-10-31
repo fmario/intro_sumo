@@ -51,11 +51,15 @@
   </PATHS>
   <FILES>
     <GeneratedCs>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\ASerialLdd1.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BT1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BUZ1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd2.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd3.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd4.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\CDC1.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\CLS1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\CS1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Cpu.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\FRTOS1.c</PathName>
@@ -63,10 +67,15 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\LedBit1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\LedBit2.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\PE_LDD.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Rx1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\SW1.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Serial1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\TI1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\TU1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\TimerIntLdd1.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Tx1.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\USB0.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\USB1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\UTIL1.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Vectors.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\WAIT1.c</PathName>
@@ -81,6 +90,14 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\queue.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\tasks.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\timers.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_cdc.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_cdc_pstn.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_class.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_dci_kinetis.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_descriptor.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_driver.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_framework.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\wdt_kinetis.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Project_Settings\Startup_Code\startup.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\Events.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Application.c</PathName>
@@ -91,20 +108,26 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Keys.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\LED.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\RTOS.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Shell.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Timer.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Trigger.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\platform.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\main.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\ASerialLdd1.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BT1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BUZ1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd2.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd3.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\BitIoLdd4.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\CDC1.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\CLS1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\CS1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Cpu.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\FRTOS1.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\FSL_USB_Stack_Config.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\FreeRTOS.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\FreeRTOSConfig.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\HF1.h</PathName>
@@ -115,15 +138,23 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\PE_Error.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\PE_LDD.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\PE_Types.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Rx1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\SW1.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Serial1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\StackMacros.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\TI1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\TU1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\TimerIntLdd1.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\Tx1.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\USB0.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\USB1.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\USB_Config.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\UTIL1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\WAIT1.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\croutine.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\derivative.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\event_groups.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\hidef.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\list.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\mpu_wrappers.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\portTicks.h</PathName>
@@ -134,6 +165,18 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\semphr.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\task.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\timers.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\types.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_bdt_kinetis.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_cdc.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_cdc_pstn.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_class.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_dci_kinetis.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_dciapi.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_descriptor.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_devapi.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_framework.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\usb_user_config.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Generated_Code\wdt_kinetis.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\Events.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Application.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Buzzer.h</PathName>
@@ -143,6 +186,7 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Keys.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\LED.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\RTOS.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Shell.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Timer.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Trigger.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\platform.h</PathName>
