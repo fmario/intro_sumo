@@ -1,0 +1,16 @@
+# LaTeX ignore
+*.aux
+*.log
+*.lof
+*.lol
+*.toc
+*.out
+*.tmp
+*.bak
+*.gz
+*.swp
+*.gnuplot
+*eps-converted*.pdf
+*.nav
+*.snm
+*.vrb
