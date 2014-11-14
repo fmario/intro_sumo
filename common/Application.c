@@ -8,7 +8,6 @@
  */
 
 #include "Platform.h"
-#include "Application.h"
 #include "WAIT1.h"
 #if PL_HAS_LED
   #include "LED.h"
@@ -29,6 +28,11 @@
   #include "RTOS.h"
   #include "FRTOS1.h"
 #endif
+#if PL_HAS_REFLECTANCE
+  #include "Reflectance.h"
+#endif
+#include "Application.h"
+
 
 #if PL_HAS_EVENTS
 static void APP_HandleEvent(EVNT_Handle event){
@@ -43,17 +47,16 @@ static void APP_HandleEvent(EVNT_Handle event){
 		LED2_Off();
 		break;
 	case EVNT_LED_HEARTBEAT:
-		LED3_Neg();
 		break;
 #if PL_NOF_KEYS >= 1
 	case EVNT_SW1_PRESSED:
-		LED3_On();
+		LED1_On();
     #if PL_HAS_SHELL
 		  CLS1_SendStr("SW1 pressed\n",CLS1_GetStdio()->stdOut);
     #endif
 		break;
 	case EVNT_SW1_LPRESSED:
-    LED3_On();
+    LED2_On();
     #if PL_HAS_SHELL
       CLS1_SendStr("SW1 long pressed\n",CLS1_GetStdio()->stdOut);
     #endif
@@ -195,6 +198,13 @@ static void APP_HandleEvent(EVNT_Handle event){
     #endif
     break;
 #endif
+#if PL_HAS_REFLECTANCE
+	case EVNT_REF_START_STOP_CALIBRATION:
+    #if PL_HAS_SEMAPHORE
+	    REF_GiveSem();
+    #endif
+	  break;
+#endif
 	default: break;
 	}
 }
@@ -202,6 +212,7 @@ static void APP_HandleEvent(EVNT_Handle event){
 
 void APP_Start(void) {
   PL_Init(); /* platform initialization */
+
   #if PL_HAS_RTOS
     if(FRTOS1_xTaskCreate( APP_Loop,
           "MainLoop",
@@ -220,12 +231,13 @@ void APP_Start(void) {
 
 #if PL_HAS_RTOS
 static void APP_Loop(void* pvParameters){
-  (void) pvParameters;
+  (void*) pvParameters;
   #if PL_HAS_BUZZER
     BUZ_Beep(440, 1000);
+    FRTOS1_vTaskDelay(1000/portTICK_RATE_MS);
   #endif
 
-    for(;;) {
+  for(;;) {
     KEY_Scan();
     #if PL_HAS_EVENTS
       EVNT_HandleEvent(APP_HandleEvent);
@@ -233,7 +245,6 @@ static void APP_Loop(void* pvParameters){
     #if PL_HAS_KEYS && PL_NOF_KEYS>0
       KEY_Scan();
     #endif
-    FRTOS1_vTaskDelay(100/portTICK_RATE_MS);
   }
 }
 #else

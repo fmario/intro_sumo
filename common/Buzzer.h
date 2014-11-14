@@ -9,8 +9,6 @@
 #ifndef BUZZER_H_
 #define BUZZER_H_
 
-#include "Platform.h"
-
 /*!
  * \brief Let the buzzer sound for a specified time.
  * \param freqHz Frequency of the sound. Ignored if the buzzer is not supporting it.

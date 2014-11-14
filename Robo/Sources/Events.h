@@ -35,17 +35,13 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 #include "SW1.h"
-#include "BitIoLdd3.h"
+#include "ExtIntLdd1.h"
 #include "WAIT1.h"
 #include "LedBit1.h"
 #include "BitIoLdd1.h"
 #include "LedBit2.h"
 #include "BitIoLdd2.h"
 #include "CS1.h"
-#include "HF1.h"
-#include "TI1.h"
-#include "TimerIntLdd1.h"
-#include "TU1.h"
 #include "CLS1.h"
 #include "USB1.h"
 #include "USB0.h"
@@ -55,8 +51,55 @@
 #include "BT1.h"
 #include "Serial1.h"
 #include "ASerialLdd1.h"
+#include "LED_IR.h"
+#include "LEDpin1.h"
+#include "BitIoLdd5.h"
+#include "RefCnt.h"
+#include "IR1.h"
+#include "BitIoLdd6.h"
+#include "IR2.h"
+#include "BitIoLdd7.h"
+#include "IR3.h"
+#include "BitIoLdd8.h"
+#include "IR4.h"
+#include "BitIoLdd9.h"
+#include "IR5.h"
+#include "BitIoLdd10.h"
+#include "IR6.h"
+#include "BitIoLdd11.h"
+#include "MOTTU.h"
+#include "DIRL.h"
+#include "BitIoLdd12.h"
+#include "PWMR.h"
+#include "PwmLdd1.h"
+#include "DIRR.h"
+#include "BitIoLdd13.h"
+#include "PWML.h"
+#include "PwmLdd2.h"
+#include "TU_MPC4728.h"
+#include "TU_QuadInt.h"
+#include "MPC4728_LDAC.h"
+#include "BitIoLdd14.h"
+#include "MPC4728_RDY.h"
+#include "BitIoLdd15.h"
+#include "Q4CLeft.h"
+#include "C11.h"
+#include "BitIoLdd16.h"
+#include "C21.h"
+#include "BitIoLdd17.h"
+#include "Q4CRight.h"
+#include "C12.h"
+#include "BitIoLdd19.h"
+#include "C23.h"
+#include "BitIoLdd20.h"
+#include "I2C1.h"
+#include "GI2C1.h"
+#include "TMOUT1.h"
 #include "BUZ1.h"
 #include "BitIoLdd4.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 #include "FRTOS1.h"
 #include "UTIL1.h"
 
@@ -154,6 +197,69 @@ void FRTOS1_vApplicationMallocFailedHook(void);
 **     Returns     : Nothing
 ** ===================================================================
 */
+
+void SW1_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  SW1_OnInterrupt (module Events)
+**
+**     Component   :  SW1 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void GI2C1_OnRequestBus(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnRequestBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called before accessing the I2C bus.
+**         Useful for starting a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void GI2C1_OnReleaseBus(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnReleaseBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called after accessing the I2C bus.
+**         Useful for ending a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+/*
+** ===================================================================
+**     Event       :  TU_QuadInt_OnCounterRestart (module Events)
+**
+**     Component   :  TU_QuadInt [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if counter overflow/underflow or counter is
+**         reinitialized by modulo or compare register matching.
+**         OnCounterRestart event and Timer unit must be enabled. See
+**         [SetEventMask] and [GetEventMask] methods. This event is
+**         available only if a [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_QuadInt_OnCounterRestart(LDD_TUserData *UserDataPtr);
 
 /* END Events */
 

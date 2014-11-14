@@ -121,7 +121,9 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Keys.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\LED.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\RTOS.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Sem.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Shell.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\ShellQueue.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Timer.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Trigger.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\platform.c</PathName>
@@ -212,7 +214,9 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Keys.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\LED.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\RTOS.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Sem.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Shell.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\ShellQueue.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Timer.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\Trigger.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\FRDM\Sources\common\platform.h</PathName>

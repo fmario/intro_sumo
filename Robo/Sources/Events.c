@@ -36,7 +36,16 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-
+#include "Platform.h"
+#if PL_HAS_TIMER
+  #include "Timer.h"
+#endif
+#if PL_HAS_EVENTS
+  #include "Event.h"
+#endif
+#if PL_HAS_KEYS
+  #include "Keys.h"
+#endif
 /*
 ** ===================================================================
 **     Event       :  Cpu_OnNMIINT (module Events)
@@ -71,7 +80,9 @@ void Cpu_OnNMIINT(void)
 */
 void TI1_OnInterrupt(void)
 {
-  /* Write your code here ... */
+#if PL_HAS_TIMER
+  TMR_OnInterrupt();
+#endif
 }
 
 /*
@@ -116,8 +127,7 @@ void FRTOS1_vApplicationStackOverflowHook(xTaskHandle pxTask, char *pcTaskName)
 */
 void FRTOS1_vApplicationTickHook(void)
 {
-  /* Called for every RTOS tick. */
-  /* Write your code here ... */
+  TMOUT1_AddTick();
 }
 
 /*
@@ -161,6 +171,85 @@ void FRTOS1_vApplicationMallocFailedHook(void)
   taskDISABLE_INTERRUPTS();
   /* Write your code here ... */
   for(;;) {}
+}
+
+/*
+** ===================================================================
+**     Event       :  SW1_OnInterrupt (module Events)
+**
+**     Component   :  SW1 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW1_OnInterrupt(void)
+{
+#if PL_HAS_KBI
+  if (KEY1_Get()) {
+    KEY_OnInterrupt(KEY_BTN1);
+  }
+#endif
+}
+
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnRequestBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called before accessing the I2C bus.
+**         Useful for starting a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void GI2C1_OnRequestBus(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnReleaseBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called after accessing the I2C bus.
+**         Useful for ending a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void GI2C1_OnReleaseBus(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  TU_QuadInt_OnCounterRestart (module Events)
+**
+**     Component   :  TU_QuadInt [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if counter overflow/underflow or counter is
+**         reinitialized by modulo or compare register matching.
+**         OnCounterRestart event and Timer unit must be enabled. See
+**         [SetEventMask] and [GetEventMask] methods. This event is
+**         available only if a [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_QuadInt_OnCounterRestart(LDD_TUserData *UserDataPtr)
+{
+  /* Write your code here ... */
 }
 
 /* END Events */

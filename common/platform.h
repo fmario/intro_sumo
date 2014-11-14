@@ -30,6 +30,8 @@
   /*!< Set to 1 to enable key/push button support, 0 otherwise */
 #define PL_HAS_KBI            (1)
   /*!< Set to 1 to enable key interrupt support, 0 otherwise */
+#define PL_HAS_KBI_NMI        (1 && PL_IS_FRDM && PL_HAS_JOYSTICK)
+  /*!< Set to 1 for special case on NMI/PTA pin on FRDM board, 0 otherwise */
 #define PL_HAS_RESET_KEY      (0 && PL_IS_FRDM && PL_HAS_KEYS)
   /*!< Set to 1 to use reset switch on FRDM as button, 0 otherwise */
 #define PL_HAS_JOYSTICK       (1 && PL_IS_FRDM && PL_HAS_KEYS)
@@ -52,6 +54,26 @@
   /*!< Set to 1 if using Bluetooth, 0 otherwise */
 #define PL_HAS_SHELL_QUEUE    (1 && PL_HAS_SHELL)
   /*!< Set to 1 if using shell queues, 0 otherwise */
+#define PL_HAS_SEMAPHORE      (1)
+  /*!< Set to 1 if using semaphore labs, 0 otherwise */
+#define PL_HAS_LINE_SENSOR    (1 && PL_IS_ROBO)
+  /*!< Set to 1 if using line sensor, 0 otherwise */
+#define PL_HAS_REFLECTANCE    (1 && PL_HAS_LINE_SENSOR)
+  /*!< Set to 1 if using reflectance sensor array, 0 otherwise */
+#define PL_HAS_MOTOR          (1 && PL_IS_ROBO)
+  /*!< Set to 1 if using motors, 0 otherwise */
+#define PL_HAS_CONFIG_NVM     (0)
+  /*!< Set to 1 if using NVMC, 0 otherwise */
+#define PL_HAS_MPC4728        (1 && PL_IS_ROBO)
+  /*!< Set to 1 if using MPC4728, 0 otherwise */
+#define PL_IS_INTRO_ZUMO_K22_V2 (1)
+#define PL_HAS_QUAD_CALIBRATION (1 && PL_HAS_MPC4728)
+  /*!< Set to 1 if using quadrature calibration, 0 otherwise */
+
+#define PL_HAS_RTOS_TRACE     (0)
+  /*!< Set to 1 if Percepio trace, 0 otherwise */
+
+#define PL_HAS_RTOS_TRACE     (0)
 
 /* additional hardware configuration */
 
@@ -65,7 +87,7 @@
   #define PL_KEY_POLLED_KEY6    (1)
   #define PL_KEY_POLLED_KEY7    (0)
 #elif PL_IS_ROBO
-  #define PL_KEY_POLLED_KEY1    (1)
+  #define PL_KEY_POLLED_KEY1    (0)
 #endif
 
 #if PL_IS_FRDM
@@ -86,10 +108,11 @@
 #endif
   #endif
 #elif PL_IS_ROBO
-  #define PL_NOF_LEDS       (1)
+  #define PL_NOF_LEDS       (2)
      /*!< We have up to 2 LED's on the robo board */
   #define PL_NOF_KEYS       (1)
      /*!< We have up to 1 push button */
+  #define PL_NOF_MOTOR      (2)
 #else
   #error "unknown configuration?"
 #endif
