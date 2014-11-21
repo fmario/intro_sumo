@@ -43,7 +43,7 @@ static void DirLPutVal(bool val) {
 }
 
 static void DirRPutVal(bool val) {
-  DIRR_PutVal(val);
+  DIRR_PutVal(!val);
 }
 
 void MOT_SetVal(MOT_MotorDevice *motor, uint16_t val) {
@@ -56,7 +56,6 @@ uint16_t MOT_GetVal(MOT_MotorDevice *motor) {
 }
 
 void MOT_SetSpeedPercent(MOT_MotorDevice *motor, MOT_SpeedPercent percent) {
-  /*! \todo See lab guide about this function */
   uint32_t val;
 
   if (percent>100) { /* make sure we are within 0..100 */
@@ -64,12 +63,14 @@ void MOT_SetSpeedPercent(MOT_MotorDevice *motor, MOT_SpeedPercent percent) {
   } else if (percent<-100) {
     percent = -100;
   }
-  motor->currSpeedPercent = percent; /* store value */
+
   if (percent<0) {
     MOT_SetDirection(motor, MOT_DIR_BACKWARD);
+    motor->currSpeedPercent = percent; /* store value */
     percent = -percent; /* make it positive */
   } else {
     MOT_SetDirection(motor, MOT_DIR_FORWARD);
+    motor->currSpeedPercent = percent; /* store value */
   }
   val = ((100-percent)*0xffff)/100; /* H-Bridge is low active! */
   MOT_SetVal(motor, (uint16_t)val);
@@ -92,21 +93,21 @@ void MOT_ChangeSpeedPercent(MOT_MotorDevice *motor, MOT_SpeedPercent relPercent)
   MOT_SetSpeedPercent(motor, relPercent);  /* set speed. This will care about the direction too */
 }
 
-void MOT_SetDirection(MOT_MotorDevice *motor, MOT_Direction dir) {
-  MOT_Direction actDir = MOT_GetDirection(motor);
-  if(dir != actDir){
-      motor->DirPutVal(dir);
-      if (motor->currSpeedPercent&&(1<<7)!=dir) {
-        motor->currSpeedPercent &= -motor->currSpeedPercent;
-      }
-  }
-}
-
 MOT_Direction MOT_GetDirection(MOT_MotorDevice *motor) {
   if (motor->currSpeedPercent<0) {
     return MOT_DIR_BACKWARD;
   } else {
     return MOT_DIR_FORWARD;
+  }
+}
+
+void MOT_SetDirection(MOT_MotorDevice *motor, MOT_Direction dir) {
+  MOT_Direction actDir = MOT_GetDirection(motor);
+  if(dir != actDir){
+      motor->DirPutVal(dir);
+      if ((motor->currSpeedPercent&&(1<<7))!=(dir<<7)) {
+        motor->currSpeedPercent = -motor->currSpeedPercent;
+      }
   }
 }
 
@@ -189,8 +190,7 @@ uint8_t MOT_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_Std
 #endif /* PL_HAS_SHELL */
 
 void MOT_Deinit(void) {
-  /*! \todo What could you do here? */
-#if 0
+#if 1
   MOT_SetSpeedPercent(&motorL, 0);
   MOT_SetSpeedPercent(&motorR, 0);
   PWML_Disable();
@@ -205,6 +205,8 @@ void MOT_Init(void) {
   motorR.SetRatio16 = PWMRSetRatio16;
   MOT_SetSpeedPercent(&motorL, 0);
   MOT_SetSpeedPercent(&motorR, 0);
+  DirLPutVal(MOT_DIR_FORWARD);
+  DirRPutVal(MOT_DIR_FORWARD);
   PWML_Enable();
   PWMR_Enable();
 }

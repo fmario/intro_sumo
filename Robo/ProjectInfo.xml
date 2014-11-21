@@ -158,6 +158,7 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Sem.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Shell.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\ShellQueue.c</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Tacho.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Timer.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Trigger.c</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\platform.c</PathName>
@@ -285,6 +286,7 @@
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Sem.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Shell.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\ShellQueue.h</PathName>
+      <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Tacho.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Timer.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\Trigger.h</PathName>
       <PathName>C:\Users\Dexter\Git\intro_sumo\Robo\Sources\common\platform.h</PathName>
