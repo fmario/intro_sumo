@@ -128,6 +128,9 @@ void FRTOS1_vApplicationStackOverflowHook(xTaskHandle pxTask, char *pcTaskName)
 void FRTOS1_vApplicationTickHook(void)
 {
   TMOUT1_AddTick();
+  #if PL_HAS_MOTOR_TACHO
+    TACHO_Sample();
+  #endif
 }
 
 /*

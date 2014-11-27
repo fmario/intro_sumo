@@ -175,7 +175,7 @@ static void REF_Measure(void) {
 static uint8_t PrintHelp(const CLS1_StdIOType *io) {
   CLS1_SendHelpStr((unsigned char*)"ref", (unsigned char*)"Group of Reflectance commands\r\n", io->stdOut);
   CLS1_SendHelpStr((unsigned char*)"  help|status", (unsigned char*)"Print help or status information\r\n", io->stdOut);
-  CLS1_SendHelpStr((unsigned char*)"  init start|stop", (unsigned char*)"Starts or stops initialization\r\n", io->stdOut);
+  CLS1_SendHelpStr((unsigned char*)"  calib start|stop", (unsigned char*)"Starts or stops calibration\r\n", io->stdOut);
   return ERR_OK;
 }
 
@@ -255,7 +255,7 @@ byte REF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOT
   if (UTIL1_strcmp((char*)cmd, CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, "ref help")==0) {
     *handled = TRUE;
     return PrintHelp(io);
-  } else if (UTIL1_strcmp((char*)cmd, "ref init start")==0 || UTIL1_strcmp((char*)cmd, "ref init stop")==0) {
+  } else if (UTIL1_strcmp((char*)cmd, "ref calib start")==0 || UTIL1_strcmp((char*)cmd, "ref calib stop")==0) {
     *handled = TRUE;
     EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION);
   } else if ((UTIL1_strcmp((char*)cmd, CLS1_CMD_STATUS)==0) || (UTIL1_strcmp((char*)cmd, "ref status")==0)) {
@@ -309,9 +309,8 @@ static void REF_StateMachine(void) {
         
     case REF_STATE_READY:
       REF_Measure();
-      if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
-        EVNT_ClearEvent(EVNT_REF_START_STOP_CALIBRATION);
-        refState = REF_STATE_START_CALIBRATION;
+      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, 5/portTICK_RATE_MS)==pdTRUE) {
+             refState = REF_STATE_STOP_CALIBRATION;
       }
       break;
   } /* switch */
@@ -333,10 +332,10 @@ void REF_Init(void) {
   timerHandle = RefCnt_Init(NULL);
   #if PL_HAS_SEMAPHORE
     FRTOS1_vSemaphoreCreateBinary(REF_Calib_Sem);
-    FRTOS1_xSemaphoreTake(REF_Calib_Sem, 10/portTICK_RATE_MS);
     if (REF_Calib_Sem==NULL) { /* semaphore creation failed */
       for(;;){} /* error */
     }
+    FRTOS1_xSemaphoreTake(REF_Calib_Sem, 10/portTICK_RATE_MS);
   #endif
   if (FRTOS1_xTaskCreate(ReflTask, "Refl", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
     for(;;){} /* error */

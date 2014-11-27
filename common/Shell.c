@@ -105,10 +105,11 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
   #if BT1_PARSE_COMMAND_ENABLED
     BT1_ParseCommand,
   #endif
+  #endif
   #if PL_HAS_LINE_SENSOR
     REF_ParseCommand,
   #endif
-  #endif
+
   #if PL_HAS_MOTOR
     MOT_ParseCommand,
   #endif
