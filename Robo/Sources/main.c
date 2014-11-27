@@ -74,6 +74,7 @@
 #include "PwmLdd2.h"
 #include "TU_MPC4728.h"
 #include "TU_QuadInt.h"
+#include "MMA1.h"
 #include "MPC4728_LDAC.h"
 #include "BitIoLdd14.h"
 #include "MPC4728_RDY.h"

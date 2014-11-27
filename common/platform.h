@@ -78,7 +78,7 @@
   /*!< Set to 1 if using PID, 0 otherwise */
 #define PL_HAS_ULTRASONIC     (0 && PL_IS_ROBO)
   /*!< Set to 1 if using ultrasonic sensor, 0 otherwise */
-#define PL_HAS_ACCEL          (0)
+#define PL_HAS_ACCEL          (1)
   /*!< Set to 1 if using an accelerometer, 0 otherwise */
 
 #define PL_HAS_RTOS_TRACE     (0 && PL_HAS_RTOS && configUSE_TRACE_HOOKS)
