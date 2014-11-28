@@ -79,6 +79,16 @@
 #include "TU_MPC4728.h"
 #include "TU_QuadInt.h"
 #include "MMA1.h"
+#include "RNET1.h"
+#include "RF1.h"
+#include "CE1.h"
+#include "BitIoLdd22.h"
+#include "CSN1.h"
+#include "BitIoLdd23.h"
+#include "IRQ1.h"
+#include "ExtIntLdd2.h"
+#include "SM2_nRF.h"
+#include "SMasterLdd1.h"
 #include "MPC4728_LDAC.h"
 #include "BitIoLdd14.h"
 #include "MPC4728_RDY.h"
@@ -261,6 +271,22 @@ void GI2C1_OnReleaseBus(void);
 */
 /* ===================================================================*/
 void TU_QuadInt_OnCounterRestart(LDD_TUserData *UserDataPtr);
+
+void RNET1_OnRadioEvent(RNET1_RadioEvent event);
+/*
+** ===================================================================
+**     Event       :  RNET1_OnRadioEvent (module Events)
+**
+**     Component   :  RNET1 [RNet]
+**     Description :
+**         Event created for various radio states, like timeout, ack
+**         received, data sent, ...
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**         event           - 
+**     Returns     : Nothing
+** ===================================================================
+*/
 
 /* END Events */
 

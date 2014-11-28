@@ -23,6 +23,7 @@
 #include "Application.h"
 #include "Event.h"
 #include "Shell.h"
+#include "CS1.h"
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
 
@@ -115,6 +116,7 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
     raw[i] = MAX_SENSOR_VALUE;
   }
   WAIT1_Waitus(50); /* give some time to charge the capacitor */
+  CS1_EnterCritical();
   (void)RefCnt_ResetCounter(timerHandle); /* reset timer counter */
   for(i=0;i<REF_NOF_SENSORS;i++) {
     SensorFctArray[i].SetInput(); /* turn I/O line as input */
@@ -123,7 +125,7 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
     cnt = 0;
     for(i=0;i<REF_NOF_SENSORS;i++) {
       if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
-        if (SensorFctArray[i].GetVal()==0) {
+        if (SensorFctArray[i].GetVal()==0 || 0x0500 <= RefCnt_GetCounterValue(timerHandle)) {
           raw[i] = RefCnt_GetCounterValue(timerHandle);
         }
       } else { /* have value */
@@ -131,6 +133,7 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
       }
     }
   } while(cnt!=REF_NOF_SENSORS);
+  CS1_ExitCritical();
   LED_IR_Off();
 }
 
@@ -280,7 +283,7 @@ static void REF_StateMachine(void) {
       
     case REF_STATE_NOT_CALIBRATED:
       REF_MeasureRaw(SensorRaw);
-      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, portMAX_DELAY)==pdTRUE) {
+      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, 100/portTICK_RATE_MS)==pdTRUE) {
         refState = REF_STATE_START_CALIBRATION;
       }
       break;
@@ -297,7 +300,7 @@ static void REF_StateMachine(void) {
     
     case REF_STATE_CALIBRATING:
       REF_CalibrateMinMax(SensorCalibMinMax.minVal, SensorCalibMinMax.maxVal, SensorRaw);
-      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, portMAX_DELAY)==pdTRUE) {
+      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, 100/portTICK_RATE_MS)==pdTRUE) {
              refState = REF_STATE_STOP_CALIBRATION;
       }
       break;
@@ -310,7 +313,7 @@ static void REF_StateMachine(void) {
     case REF_STATE_READY:
       REF_Measure();
       if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, 5/portTICK_RATE_MS)==pdTRUE) {
-             refState = REF_STATE_STOP_CALIBRATION;
+             refState = REF_STATE_START_CALIBRATION;
       }
       break;
   } /* switch */
