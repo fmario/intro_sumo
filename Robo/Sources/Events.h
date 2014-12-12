@@ -39,6 +39,8 @@
 #include "WAIT1.h"
 #include "LedBit1.h"
 #include "BitIoLdd1.h"
+#include "TU_US.h"
+#include "TRIG.h"
 #include "LedBit2.h"
 #include "BitIoLdd2.h"
 #include "CS1.h"
@@ -89,6 +91,8 @@
 #include "ExtIntLdd2.h"
 #include "SM2_nRF.h"
 #include "SMasterLdd1.h"
+#include "IFsh1.h"
+#include "IntFlashLdd1.h"
 #include "MPC4728_LDAC.h"
 #include "BitIoLdd14.h"
 #include "MPC4728_RDY.h"
@@ -108,9 +112,6 @@
 #include "TMOUT1.h"
 #include "BUZ1.h"
 #include "BitIoLdd4.h"
-#include "TI1.h"
-#include "TimerIntLdd1.h"
-#include "TU1.h"
 #include "FRTOS1.h"
 #include "UTIL1.h"
 
@@ -287,6 +288,48 @@ void RNET1_OnRadioEvent(RNET1_RadioEvent event);
 **     Returns     : Nothing
 ** ===================================================================
 */
+
+/*
+** ===================================================================
+**     Event       :  TU_US_OnCounterRestart (module Events)
+**
+**     Component   :  TU_US [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if counter overflow/underflow or counter is
+**         reinitialized by modulo or compare register matching.
+**         OnCounterRestart event and Timer unit must be enabled. See
+**         [SetEventMask] and [GetEventMask] methods. This event is
+**         available only if a [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_US_OnCounterRestart(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Event       :  TU_US_OnChannel0 (module Events)
+**
+**     Component   :  TU_US [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if compare register match the counter registers or
+**         capture register has a new content. OnChannel0 event and
+**         Timer unit must be enabled. See [SetEventMask] and
+**         [GetEventMask] methods. This event is available only if a
+**         [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_US_OnChannel0(LDD_TUserData *UserDataPtr);
 
 /* END Events */
 

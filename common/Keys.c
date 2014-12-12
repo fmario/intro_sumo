@@ -21,47 +21,48 @@ void KEY_Scan(void) {
 #if PL_HAS_DEBOUNCE
   KEYDBNC_Process();
 #else
-  #if PL_NOF_KEYS >= 1 && PL_KEY1_POLLED
-    if (KEY1_Get()) { /* key pressed */
-      EVNT_SetEvent(EVNT_SW1_PRESSED);
-    }
-  #endif
-  #if PL_NOF_KEYS >= 2 && PL_KEY2_POLLED
-    if (KEY2_Get()) { /* key pressed */
-      EVNT_SetEvent(EVNT_SW2_PRESSED);
-    }
-  #endif
-  #if PL_NOF_KEYS >= 3 && PL_KEY3_POLLED
-    if (KEY3_Get()) { /* key pressed */
-      EVNT_SetEvent(EVNT_SW3_PRESSED);
-    }
-  #endif
-  #if PL_NOF_KEYS >= 4 && PL_KEY4_POLLED
-    if (KEY4_Get()) { /* key pressed */
-      EVNT_SetEvent(EVNT_SW4_PRESSED);
-    }
-  #endif
-  #if PL_NOF_KEYS >= 5 && PL_KEY5_POLLED
-    if (KEY5_Get()) { /* key pressed */
-      EVNT_SetEvent(EVNT_SW5_PRESSED);
-    }
-  #endif
-  #if PL_NOF_KEYS >= 6 && PL_KEY6_POLLED
-    if (KEY6_Get()) { /* key pressed */
-      EVNT_SetEvent(EVNT_SW6_PRESSED);
-    }
-  #endif
-  #if PL_NOF_KEYS >= 7 && PL_KEY7_POLLED
-    if (KEY7_Get()) { /* key pressed */
-      EVNT_SetEvent(EVNT_SW7_PRESSED);
-    }
-  #endif
+#if PL_NOF_KEYS >= 1 && PL_KEY_POLLED_KEY1
+  if (KEY1_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW1_PRESSED);
+  }
 #endif
+  /*! \todo Implement handling of all the other keys */
+#if PL_NOF_KEYS >= 2 && PL_KEY_POLLED_KEY2
+  if (KEY2_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW2_PRESSED);
+  }
+#endif
+#if PL_NOF_KEYS >= 3 && PL_KEY_POLLED_KEY3
+  if (KEY3_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW3_PRESSED);
+  }
+#endif
+#if PL_NOF_KEYS >= 4 && PL_KEY_POLLED_KEY4
+  if (KEY4_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW4_PRESSED);
+  }
+#endif
+#if PL_NOF_KEYS >= 5 && PL_KEY_POLLED_KEY5
+  if (KEY5_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW5_PRESSED);
+  }
+#endif
+#if PL_NOF_KEYS >= 6 && PL_KEY_POLLED_KEY6
+  if (KEY6_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW6_PRESSED);
+  }
+#endif
+#if PL_NOF_KEYS >= 7 && PL_KEY_POLLED_KEY7
+  if (KEY7_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW7_PRESSED);
+  }
+#endif
+#endif /* PL_HAS_DEBOUNCE */
 }
 
 #if PL_HAS_KBI
 void KEY_OnInterrupt(KEY_Buttons button) {
-
+  /*! \todo will need to implement functionality for interrupts */
 #if PL_HAS_DEBOUNCE
   KEYDBNC_Process();
 #else
@@ -103,6 +104,11 @@ void KEY_EnableInterrupts(void) {
 #endif
 #if PL_NOF_KEYS >= 3 && !PL_KEY_POLLED_KEY3
   SW3_Enable();
+#if PL_HAS_KBI_NMI
+  /* necessary to clear interrupts on Port A */
+  PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, ExtIntLdd4_PIN_INDEX);
+  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR, 4, PORT_PDD_DMA_ON_FALLING);
+#endif
 #endif
 #if PL_NOF_KEYS >= 4 && !PL_KEY_POLLED_KEY4
   SW4_Enable();
@@ -127,6 +133,9 @@ void KEY_DisableInterrupts(void) {
 #endif
 #if PL_NOF_KEYS >= 3 && !PL_KEY_POLLED_KEY3
   SW3_Disable();
+#if PL_HAS_KBI_NMI
+  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR, 4, PORT_PDD_INTERRUPT_DMA_DISABLED);
+#endif
 #endif
 #if PL_NOF_KEYS >= 4 && !PL_KEY_POLLED_KEY4
   SW4_Disable();
@@ -141,10 +150,11 @@ void KEY_DisableInterrupts(void) {
   SW7_Disable();
 #endif
 }
+
 void PORTA_OnInterrupt(void) {
   void Cpu_ivINT_PORTA(void); /* prototype of ISR in Cpu.c */
-  /* call interrupt handler created by the ExtInt components */
-  Cpu_ivINT_PORTA();
+
+  Cpu_ivINT_PORTA(); /* call interrupt handler created by the ExtInt components */
 }
 #endif
 

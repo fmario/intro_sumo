@@ -1,12 +1,14 @@
 /**
  * \file
- * \brief Event driver interface.
- * \author Mario Felder
+ * \brief Event driver implementation.
+ * \author Erich Styger, erich.styger@hslu.ch
  *
  * This module implements a generic event driver. We are using numbered events starting with zero.
  * EVNT_HandleEvent() can be used to process the pending events. Note that the event with the number zero
  * has the highest priority and will be handled first.
+ * \todo Make this module reentrant and thread safe!
  */
+
 #include "Platform.h"
 #if PL_HAS_EVENTS
 #include "Event.h" /* our own interface */
@@ -27,7 +29,7 @@ static EVNT_MemUnit EVNT_Events[((EVNT_NOF_EVENTS-1)/EVNT_MEM_UNIT_NOF_BITS)+1];
 
 void EVNT_SetEvent(EVNT_Handle event) {
   CS1_CriticalVariable()
-
+  
   CS1_EnterCritical();
   SET_EVENT(event);
   CS1_ExitCritical();
@@ -100,6 +102,3 @@ void EVNT_Deinit(void) {
 }
 
 #endif /* PL_HAS_EVENTS */
-
-
-

@@ -9,9 +9,6 @@
 #ifndef KEYDEBOUNCE_H_
 #define KEYDEBOUNCE_H_
 
-#define KEYDBNC_DBNCTIME 50 /* debounce time in ms */
-#define KEYDBNC_LONGTIME 500 /* time for long pressed detection in ms */
-
 /*!
  * \brief Kicks the debouncing state machine.
  */

@@ -3,7 +3,7 @@
  * \brief Platform implementation module.
  * \author Erich Styger, erich.styger@hslu.ch
  *
- * This implements the platform module.
+ * This implements the platform module. 
  * Here the platform gets initialized, and all platform dependent macros get defined.
  */
 
@@ -60,23 +60,29 @@
 #if PL_HAS_PID
   #include "Pid.h"
 #endif
+#if PL_HAS_DRIVE
+  #include "Drive.h"
+#endif
 #if PL_HAS_ACCEL
   #include "Accel.h"
 #endif
 #if PL_HAS_ULTRASONIC
   #include "Ultrasonic.h"
 #endif
+#if PL_HAS_ACCEL
+  #include "Accel.h"
+#endif
 #if PL_HAS_RADIO
   #include "RNet_App.h"
 #endif
-#if PL_HAS_REMOTE
-  #include "Remote.h"
-#endif
+//#if PL_HAS_REMOTE
+  //#include "Remote.h"
+//#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED
   LED_Init();
-#endif
+#endif  
 #if PL_HAS_TIMER
   TMR_Init();
 #endif
@@ -126,6 +132,9 @@ void PL_Init(void) {
 #if PL_HAS_PID
   PID_Init();
 #endif
+#if PL_HAS_DRIVE
+  DRV_Init();
+#endif
 #if PL_HAS_ACCEL
   ACCEL_Init();
 #endif
@@ -134,6 +143,9 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_RADIO
   RNETA_Init();
+#endif
+#if PL_HAS_ACCEL
+  ACCEL_Init();
 #endif
 #if PL_HAS_REMOTE
   REMOTE_Init();
@@ -144,6 +156,9 @@ void PL_Deinit(void) {
 #if PL_HAS_REMOTE
   REMOTE_Deinit();
 #endif
+#if PL_HAS_ACCEL
+  ACCEL_Deinit();
+#endif
 #if PL_HAS_RADIO
   RNETA_Deinit();
 #endif
@@ -152,6 +167,9 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_ACCEL
   ACCEL_Deinit();
+#endif
+#if PL_HAS_DRIVE
+  DRV_Deinit();
 #endif
 #if PL_HAS_PID
   PID_Deinit();

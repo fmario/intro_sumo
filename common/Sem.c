@@ -15,7 +15,7 @@
   #include "RTOSTRC1.h"
 #endif
 
-#define USE_SEMAPHORES 1
+#define USE_SEMAPHORES 0
 
 #if USE_SEMAPHORES
 static portTASK_FUNCTION(vSlaveTask, pvParameters) {
@@ -25,7 +25,7 @@ static portTASK_FUNCTION(vSlaveTask, pvParameters) {
   for(;;) {
     if (sem != NULL) {
       if (FRTOS1_xSemaphoreTake(sem, portMAX_DELAY)==pdTRUE) {
-          /* do anything */
+        LED1_Neg();
       }
     }
   }

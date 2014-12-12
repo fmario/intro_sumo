@@ -23,13 +23,8 @@
 #include "Application.h"
 #include "Event.h"
 #include "Shell.h"
-#include "CS1.h"
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
-
-#if PL_HAS_SEMAPHORE
-  xSemaphoreHandle REF_Calib_Sem = NULL;
-#endif
 
 typedef enum {
   REF_STATE_INIT,
@@ -108,7 +103,7 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   uint8_t i;
 
   LED_IR_On(); /* IR LED's on */
-  WAIT1_Waitus(200);
+  WAIT1_Waitus(200); /*! \todo adjust time as needed */
 
   for(i=0;i<REF_NOF_SENSORS;i++) {
     SensorFctArray[i].SetOutput(); /* turn I/O line as output */
@@ -116,24 +111,24 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
     raw[i] = MAX_SENSOR_VALUE;
   }
   WAIT1_Waitus(50); /* give some time to charge the capacitor */
-  CS1_EnterCritical();
   (void)RefCnt_ResetCounter(timerHandle); /* reset timer counter */
   for(i=0;i<REF_NOF_SENSORS;i++) {
     SensorFctArray[i].SetInput(); /* turn I/O line as input */
   }
   do {
+    /*! \todo Be aware that this might block for a long time, if discharging takes long. Consider using a timeout. */
     cnt = 0;
     for(i=0;i<REF_NOF_SENSORS;i++) {
       if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
-        if (SensorFctArray[i].GetVal()==0 || 0x0500 <= RefCnt_GetCounterValue(timerHandle)) {
+        if (SensorFctArray[i].GetVal()==0  || 0x2000 <= RefCnt_GetCounterValue(timerHandle)) {
           raw[i] = RefCnt_GetCounterValue(timerHandle);
         }
+
       } else { /* have value */
         cnt++;
       }
     }
   } while(cnt!=REF_NOF_SENSORS);
-  CS1_ExitCritical();
   LED_IR_Off();
 }
 
@@ -150,6 +145,30 @@ static void REF_CalibrateMinMax(SensorTimeType min[REF_NOF_SENSORS], SensorTimeT
     }
   }
 }
+
+static void REF_HardCalibrate(SensorTimeType min[REF_NOF_SENSORS], SensorTimeType max[REF_NOF_SENSORS]){
+  int i;
+
+  for(i=0;i<REF_NOF_SENSORS;i++) {
+	  min[i] = 0x200;
+	  max[i] = 0x2300;
+  }
+}
+
+void REF_SetMeasur(void){
+  REF_HardCalibrate(SensorCalibMinMax.minVal, SensorCalibMinMax.maxVal);
+  refState = REF_STATE_READY;
+}
+
+
+// eigene Methode zm auslesen der Werte für statemachine
+int Get_Reflectance_Values(int i){
+
+	return SensorCalibrated[i];
+
+}
+
+
 
 static void ReadCalibrated(SensorTimeType calib[REF_NOF_SENSORS], SensorTimeType raw[REF_NOF_SENSORS]) {
   int i;
@@ -178,7 +197,6 @@ static void REF_Measure(void) {
 static uint8_t PrintHelp(const CLS1_StdIOType *io) {
   CLS1_SendHelpStr((unsigned char*)"ref", (unsigned char*)"Group of Reflectance commands\r\n", io->stdOut);
   CLS1_SendHelpStr((unsigned char*)"  help|status", (unsigned char*)"Print help or status information\r\n", io->stdOut);
-  CLS1_SendHelpStr((unsigned char*)"  calib start|stop", (unsigned char*)"Starts or stops calibration\r\n", io->stdOut);
   return ERR_OK;
 }
 
@@ -258,18 +276,11 @@ byte REF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOT
   if (UTIL1_strcmp((char*)cmd, CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, "ref help")==0) {
     *handled = TRUE;
     return PrintHelp(io);
-  } else if (UTIL1_strcmp((char*)cmd, "ref calib start")==0 || UTIL1_strcmp((char*)cmd, "ref calib stop")==0) {
-    *handled = TRUE;
-    EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION);
   } else if ((UTIL1_strcmp((char*)cmd, CLS1_CMD_STATUS)==0) || (UTIL1_strcmp((char*)cmd, "ref status")==0)) {
     *handled = TRUE;
     return PrintStatus(io);
   }
   return ERR_OK;
-}
-
-void REF_GiveSem(void){
-  (void)xSemaphoreGive(REF_Calib_Sem);
 }
 
 static void REF_StateMachine(void) {
@@ -281,10 +292,15 @@ static void REF_StateMachine(void) {
       refState = REF_STATE_NOT_CALIBRATED;
       break;
       
+
+      // SW1 pressen, dann kommt er da rein.
     case REF_STATE_NOT_CALIBRATED:
       REF_MeasureRaw(SensorRaw);
-      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, 100/portTICK_RATE_MS)==pdTRUE) {
+      /*! \todo Add a new event to your event module...*/
+      if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
+        EVNT_ClearEvent(EVNT_REF_START_STOP_CALIBRATION);
         refState = REF_STATE_START_CALIBRATION;
+        break;
       }
       break;
     
@@ -300,8 +316,9 @@ static void REF_StateMachine(void) {
     
     case REF_STATE_CALIBRATING:
       REF_CalibrateMinMax(SensorCalibMinMax.minVal, SensorCalibMinMax.maxVal, SensorRaw);
-      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, 100/portTICK_RATE_MS)==pdTRUE) {
-             refState = REF_STATE_STOP_CALIBRATION;
+      if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
+        EVNT_ClearEvent(EVNT_REF_START_STOP_CALIBRATION);
+        refState = REF_STATE_STOP_CALIBRATION;
       }
       break;
     
@@ -312,8 +329,9 @@ static void REF_StateMachine(void) {
         
     case REF_STATE_READY:
       REF_Measure();
-      if (FRTOS1_xSemaphoreTake(REF_Calib_Sem, 5/portTICK_RATE_MS)==pdTRUE) {
-             refState = REF_STATE_START_CALIBRATION;
+      if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
+        EVNT_ClearEvent(EVNT_REF_START_STOP_CALIBRATION);
+        refState = REF_STATE_START_CALIBRATION;
       }
       break;
   } /* switch */
@@ -333,13 +351,7 @@ void REF_Deinit(void) {
 void REF_Init(void) {
   refState = REF_STATE_INIT;
   timerHandle = RefCnt_Init(NULL);
-  #if PL_HAS_SEMAPHORE
-    FRTOS1_vSemaphoreCreateBinary(REF_Calib_Sem);
-    if (REF_Calib_Sem==NULL) { /* semaphore creation failed */
-      for(;;){} /* error */
-    }
-    FRTOS1_xSemaphoreTake(REF_Calib_Sem, 10/portTICK_RATE_MS);
-  #endif
+  /*! \todo You might need to adjust priority or other task settings */
   if (FRTOS1_xTaskCreate(ReflTask, "Refl", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
     for(;;){} /* error */
   }

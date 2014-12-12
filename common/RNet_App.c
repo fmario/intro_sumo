@@ -117,7 +117,7 @@ static void Process(void) {
 
 static void Init(void) {
   if (RAPP_SetThisNodeAddr(RNWK_ADDR_BROADCAST)!=ERR_OK) { /* set a default address */
-    //APP_DebugPrint((unsigned char*)"ERR: Failed setting node address\r\n");
+    APP_DebugPrint((unsigned char*)"ERR: Failed setting node address\r\n");
   }
 }
 
@@ -138,7 +138,7 @@ void RNETA_Deinit(void) {
 void RNETA_Init(void) {
   RNET1_Init(); /* initialize stack */
   if (RAPP_SetMessageHandlerTable(handlerTable)!=ERR_OK) { /* assign application message handler */
-    //APP_DebugPrint((unsigned char*)"ERR: failed setting message handler!\r\n");
+    APP_DebugPrint((unsigned char*)"ERR: failed setting message handler!\r\n");
   }
   if (FRTOS1_xTaskCreate(
         RadioTask,  /* pointer to the task */

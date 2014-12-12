@@ -22,7 +22,7 @@
     /*!< Toggle LED 1 */
   #define LED1_Get()    LedBit1_GetVal()
     /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED1_Put(val) LedBit1_PutVal(val)
+  #define LED1_Put(val) LedBit1_PutVal(!val)
     /*!< Turn LED on or off */
   #define LED1_Init()   /* do nothing */
     /*!< Initialize LED */
@@ -55,7 +55,7 @@
     /*!< Toggle LED 1 */
   #define LED2_Get()    LedBit2_GetVal()
     /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED2_Put(val) LedBit2_PutVal(val)
+  #define LED2_Put(val) LedBit2_PutVal(!val)
     /*!< Turn LED on or off */
   #define LED2_Init()   /* do nothing */
     /*!< Initialize LED */
@@ -88,7 +88,7 @@
     /*!< Toggle LED 1 */
   #define LED3_Get()    LedBit3_GetVal()
     /*!< Return TRUE if LED is on, FALSE otherwise */
-  #define LED3_Put(val) LedBit3_PutVal(val)
+  #define LED3_Put(val) LedBit3_PutVal(!val)
     /*!< Turn LED on or off */
   #define LED3_Init()   /* do nothing */
     /*!< Initialize LED */
@@ -110,15 +110,6 @@
   #define LED3_Deinit() /* do nothing */
     /*!< De-Initialize LED 3 */
 #endif
-/*!
- * \brief Set all LED off .
- */
-void LED_AllOff(void);
-
-/*!
- * \brief Set all LED on .
- */
-void LED_AllOn(void);
 
 /*!
  * \brief LED test routine.

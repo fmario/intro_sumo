@@ -24,16 +24,19 @@
    */
   uint8_t REF_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 
+  void REF_SetMeasur(void);
+
   #define REF_PARSE_COMMAND_ENABLED 1
 #else
   #define REF_PARSE_COMMAND_ENABLED 0
 #endif
 
-void REF_GiveSem(void);
 /*!
  * \brief Driver Deinitialization.
  */
 void REF_Deinit(void);
+
+int Get_Reflectance_Values(int i);
 
 /*!
  * \brief Driver Initialization.

@@ -1,7 +1,7 @@
 /**
  * \file
  * \brief Event driver interface.
- * \author Mario Felder
+ * \author Erich Styger, erich.styger@hslu.ch
  *
  * This module implements a generic event driver. We are using numbered events starting with zero.
  * EVNT_HandleEvent() can be used to process the pending events. Note that the event with the number zero
@@ -13,11 +13,11 @@
 
 #include "Platform.h"
 
-#ifdef PL_HAS_EVENTS
+#if PL_HAS_EVENTS
 
 typedef enum EVNT_Handle {
   EVNT_INIT,            /*!< System Initialization Event */
-  EVNT_LED_HEARTBEAT,
+  EVENT_LED_HEARTBEAT,
 #if PL_NOF_KEYS >= 1
   EVNT_SW1_PRESSED,
   EVNT_SW1_LPRESSED,
@@ -53,9 +53,7 @@ typedef enum EVNT_Handle {
   EVNT_SW7_LPRESSED,
   EVNT_SW7_RELEASED,
 #endif
-#if PL_HAS_LINE_SENSOR
   EVNT_REF_START_STOP_CALIBRATION,
-#endif
   EVNT_NOF_EVENTS       /*!< Must be last one! */
 } EVNT_Handle;
 
@@ -97,6 +95,7 @@ void EVNT_Init(void);
 /*! \brief Event module de-initialization */
 void EVNT_Deinit(void);
 
-#endif
+#endif /* PL_HAS_EVENTS */
+
 
 #endif /* EVENT_H_ */
